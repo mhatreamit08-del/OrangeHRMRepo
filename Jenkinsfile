@@ -12,7 +12,6 @@ pipeline {
     }
 
     parameters {
-        choice(name: 'ENV', choices: ['qa', 'staging'], description: 'Target environment for test execution')
         string(name: 'SUITE_FILE', defaultValue: 'testng.xml', description: 'TestNG suite file to run')
     }
 
@@ -34,8 +33,8 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                echo "Executing TestNG suite: ${params.SUITE_FILE} on env: ${params.ENV}"
-                bat "mvn test -Dsurefire.suiteXmlFiles=${params.SUITE_FILE} -Denv=${params.ENV}"
+                echo "Executing TestNG suite: ${params.SUITE_FILE}"
+                bat "mvn test -Dsurefire.suiteXmlFiles=${params.SUITE_FILE}"
             }
         }
 
